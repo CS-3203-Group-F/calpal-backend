@@ -60,3 +60,22 @@ This project follows a modular structure that separates concerns for better main
 - services/: Holds the business logic of your application, often used by the controllers.
 - tests/: Contains all the test files for testing your application.
 - server.js: The entry point of the application. Initializes the app and includes all the necessary setup.
+
+### Branching and Versioning
+
+#### Branching
+
+Use “feat/xxxx-name” and “fix/xxxx-name” branch naming convention. Every fix and feature should be on a new branch and merged with main through a reviewed pull request.
+
+#### Versioning
+
+We will use Semantic Versioning for our versioning convention.
+
+1. MAJOR version when you make incompatible API changes
+2. MINOR version when you add functionality in a backward compatible manner
+3. PATCH version when you make backward compatible bug fixes
+
+   ```
+   [Major].[Minor].[Patch]
+   Ex.: 1.3.14 v.
+   ```
