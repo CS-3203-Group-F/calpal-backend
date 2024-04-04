@@ -1,6 +1,6 @@
 # CalPal Backend
 
-This is the report the backend of the CalPal application, handling all logic and database interaction.
+This is the repo the backend of the CalPal application, handling all logic and database interaction.
 
 ## Getting Started
 
@@ -15,7 +15,7 @@ Node.js
 npm
 ```
 
-`npm` is included with Node.js. To install Node.js, download the installer for your OS.
+`npm` is included with Node.js. We are using version 18. To install Node.js, download the installer for your OS.
 
 ### Installing
 
