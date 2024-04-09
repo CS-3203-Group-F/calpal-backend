@@ -6,7 +6,7 @@ const createUser = async (email, password, firstName, lastName) => {
   const hashedPassword = await bcrypt.hash(password, 10);
   // Insert into your database and return the new user
   // This is simplified; make sure to handle errors and constraints
-  const result = await db.query('INSERT INTO users (email, password, first_name, last_name) VALUES ($1, $2, $3, $4) RETURNING *', [email, hashedPassword, firstName, lastName]);
+  const result = await db.query('INSERT INTO users (email, passwordhash, first_name, last_name) VALUES ($1, $2, $3, $4) RETURNING *', [email, hashedPassword, firstName, lastName]);
   return new User(result.rows[0]);
 };
 

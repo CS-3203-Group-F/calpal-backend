@@ -5,7 +5,7 @@ const initializePassport = require("./passportConfig");
 const passport = require("passport");
 
 
-initializePassport(passport); // Pass the passport module to the function
+
 
 
 const app = express();
@@ -13,14 +13,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-// Initialize passport not sure if this is correct 
-app.use(session({
-  secret: process.env.SESSION_SECRET, // Keep this secret in environment variables
-  resave: false,
-  saveUninitialized: false
-}));
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 // Test route
 app.get("/", (req, res) => {
@@ -47,3 +40,13 @@ testDbConnection();
 app.listen(port, () => {
   console.log("Server is running on port 3000");
 });
+
+initializePassport(passport); // Pass the passport module to the function
+// Initialize passport not sure if this is correct 
+app.use(session({
+  secret: process.env.SESSION_SECRET, // Keep this secret in environment variables
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
