@@ -1,6 +1,6 @@
 const db = require("../models/db");
 
-const EventIdsByUserId = async (userId) => {
+const getEventIdsByUserId = async (userId) => {
   const query = `
     SELECT ue.event_id FROM users_events ue
     WHERE ue.user_id = $1;
@@ -16,7 +16,7 @@ const EventIdsByUserId = async (userId) => {
   }
 };
 
-const EventDetailsById = async (eventId) => {
+const getEventDetailsById = async (eventId) => {
   const query = `
     SELECT * FROM events
     WHERE id = $1;
@@ -32,4 +32,4 @@ const EventDetailsById = async (eventId) => {
   }
 };
 
-module.exports = { EventIdsByUserId };
+module.exports = { getEventIdsByUserId, getEventDetailsById };
