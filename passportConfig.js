@@ -15,7 +15,7 @@ function initialize(passport) {
     }
 
     try { // If the user is found, check if the password is correct
-      if (await bcrypt.compare(password, user.password)) { // If the password is correct
+      if (await bcrypt.compare(password, user.passwordhash)) { // If the password is correct
         return done(null, user);
       } else {
         return done(null, false, { message: 'Password incorrect' }); // If the password is incorrect
