@@ -1,10 +1,10 @@
 const authService = require('../services/authService.js'); // Path to your authService module
 
 const testCreateUser = async () => {
-  const email = 'test@example.com';
-  const password = 'testpassword';
-  const firstName = 'Test';
-  const lastName = 'User';
+  const email = 'caleb.m.baade-1@ou.edu';
+  const password = 'password123';
+  const firstName = 'Caleb';
+  const lastName = 'Baade';
 
   try {
     const user = await authService.createUser(email, password, firstName, lastName);
@@ -14,8 +14,8 @@ const testCreateUser = async () => {
   }
 };
 const testVerifyUser = async () => {
-  const email = 'test@example.com';
-  const password = 'testpassword';
+  const email = 'caleb.m.baade-1@ou.edu';
+  const password = 'password123';
 
   try {
     const user = await authService.verifyUser(email, password);
@@ -26,6 +26,16 @@ const testVerifyUser = async () => {
   }
 };
 
-//testCreateUser();
-testVerifyUser();
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+const runTests = async () => {
+  await testCreateUser();
+  await delay(1000); // Wait for 1 second
+  await testVerifyUser();
+};
+
+runTests();
+
 

@@ -8,7 +8,7 @@ class User { //Sprint 1 Issue #4 User Authentication
     }
 
     static fromJSON(jsonObj) { //Sprint 1 Issue #4 User Authentication
-      console.log(jsonObj);
+      //console.log(jsonObj);
       return new User(jsonObj.id, jsonObj.email, jsonObj.passwordhash, jsonObj.first_name, jsonObj.last_name);
     }
     
