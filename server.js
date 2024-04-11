@@ -1,11 +1,18 @@
 require("dotenv").config();
 const express = require("express");
 const db = require("./models/db"); // Adjust the path according to your project structure
+;
+
+
+
+
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+
+
 
 // Test route
 app.get("/", (req, res) => {
