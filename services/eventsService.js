@@ -19,7 +19,7 @@ const getEventIdsByUserId = async (userId) => {
 const getEventDetailsById = async (eventId) => {
   const query = `
     SELECT * FROM events
-    WHERE id = $1;
+    WHERE event_id = $1;
   `;
 
   try {

@@ -8,7 +8,7 @@
  * @param {string} organizer - The organizer of the event.
  */
 class Event {
-  constructor(title, description, start_date, end_date, status, organizer) {
+  constructor(title, description, start_date, end_date, organizer) {
     this.title = title;
     this.description = description;
     this.start_date = start_date;

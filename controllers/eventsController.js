@@ -1,12 +1,14 @@
+const express = require("express");
 const eventsService = require("../services/eventsService");
 
 const EventIdsByUserId = async (req, res) => {
   try {
     const userId = req.params.userId;
     const eventIds = await eventsService.getEventIdsByUserId(userId);
-    res.status(200).json(eventIds);
+    console.log(eventIds);
+    res.json(eventIds);
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).send({ message: err.message });
   }
 };
 
@@ -14,9 +16,10 @@ const EventDetailsById = async (req, res) => {
   try {
     const eventId = req.params.eventId;
     const eventDetails = await eventsService.getEventDetailsById(eventId);
-    res.status(200).json(eventDetails);
+    console.log(eventDetails);
+    res.json(eventDetails);
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).send({ message: err.message });
   }
 };
 
