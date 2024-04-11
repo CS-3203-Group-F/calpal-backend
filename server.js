@@ -1,8 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const db = require("./models/db"); // Adjust the path according to your project structure
-const initializePassport = require("./passportConfig");
-const passport = require("passport");
+;
 
 
 
@@ -40,14 +39,3 @@ testDbConnection();
 app.listen(port, () => {
   console.log("Server is running on port 3000");
 });
-/* Not sure on this part yet so its not allowed exist
-initializePassport(passport); // Pass the passport module to the function
-// Initialize passport not sure if this is correct 
-app.use(session({
-  secret: process.env.SESSION_SECRET, // Keep this secret in environment variables
-  resave: false,
-  saveUninitialized: false
-}));
-app.use(passport.initialize());
-app.use(passport.session());
-*/
