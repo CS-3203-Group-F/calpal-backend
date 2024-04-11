@@ -1,18 +1,13 @@
 require("dotenv").config();
 const express = require("express");
-const db = require("./models/db"); // Adjust the path according to your project structure
-;
-
-
-
+const db = require("./models/db");
+const eventsRoutes = require("./routes/eventsRoutes");
 
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-
-
 
 // Test route
 app.get("/", (req, res) => {
@@ -34,6 +29,7 @@ const testDbConnection = async () => {
 testDbConnection();
 
 // Set up routes
+app.use("/", eventsRoutes);
 
 // Check if the server is running
 app.listen(port, () => {
