@@ -1,6 +1,3 @@
-require("dotenv").config();
-
-
 const express = require("express");
 const cors = require("cors");
 const db = require("./models/db"); // Assuming you have an index.js file in your models directory that imports all models

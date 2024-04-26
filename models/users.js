@@ -1,21 +1,35 @@
-class User {
-  //Sprint 1 Issue #4 User Authentication
-  constructor(email, password, firstName, lastName) {
-    this.email = email;
-    this.password = password;
-    this.firstName = firstName;
-    this.lastName = lastName;
-  }
+// models/User.js
+const { DataTypes, Model } = require('sequelize');
+const db = require('./db');
+class User extends Model {}
 
-  static fromJSON(jsonObj) {
-    //Sprint 1 Issue #4 User Authentication
-    return new User(
-      jsonObj.email,
-      jsonObj.passwordhash,
-      jsonObj.first_name,
-      jsonObj.last_name
-    );
-  }
+function userModel(sequelize) {
+
+  const user = User.init({
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+    passwordHash: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  }, {
+    sequelize,
+    modelName: 'User',
+    tableName: 'users'
+  });
+
+  return user;
 }
 
-module.exports = User;
+module.exports = userModel;

@@ -1,6 +1,8 @@
 // config/database.js
+
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
+const userModel = require('./users');
 
 // Create a Sequelize instance
 const sequelize = new Sequelize(
@@ -20,4 +22,12 @@ const sequelize = new Sequelize(
   }
 );
 
-module.exports = sequelize;
+// Define the models
+const db = {
+  sequelize,
+  users: userModel(sequelize)
+};
+
+sequelize.sync(); // Sync all models with the database
+
+module.exports = db;
