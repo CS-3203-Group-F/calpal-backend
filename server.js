@@ -3,12 +3,41 @@ const express = require("express");
 const cors = require("cors");
 const db = require("./models/db");
 const eventsRoutes = require("./routes/eventsRoutes");
+const authRoutes = require("./routes/authRoutes");
+const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require('./passport/localStrategy');
+const flash = require('express-flash');
+
 
 const app = express();
 const port = process.env.PORT || 3001;
 
+// configure session middleware
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
+}));
+
 app.use(express.json());
 app.use(cors());
+
+
+// Initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use('local',LocalStrategy);
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [id]);
+  const user = rows[0];
+  done(null, user);
+});
 
 // Test route
 app.get("/", (req, res) => {
@@ -31,6 +60,7 @@ testDbConnection();
 
 // Set up routes
 app.use("/", eventsRoutes);
+app.use("/", authRoutes);
 
 // Check if the server is running
 app.listen(port, () => {

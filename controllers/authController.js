@@ -12,20 +12,11 @@ const signUp = async (req, res) => {
   }
 };
 
-const signIn = async (req, res) => {
-  try {
-
-    const email = req.body.email;
-    const password = req.body.password;
-    const user = await authService.verifyUser(email, password);
-    res.status(200);
-    return res.status(200).json(user);
-  } catch (error) {
-    res.status(400).send(error.message);
-  
-  }
-   
-};
+const signIn = passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: true
+});
 
 
 const signOut = (req, res) => {
