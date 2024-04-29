@@ -1,5 +1,6 @@
 const passport = require('passport');
 const authService = require('../services/authService');
+const { emit } = require('nodemon');
 
 const signUp = async (req, res) => {
   try {
@@ -11,11 +12,21 @@ const signUp = async (req, res) => {
   }
 };
 
-const signIn = passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login',
-  failureFlash: true
-});
+const signIn = async (req, res) => {
+  try {
+
+    const email = req.body.email;
+    const password = req.body.password;
+    const user = await authService.verifyUser(email, password);
+    res.status(200);
+    return res.status(200).json(user);
+  } catch (error) {
+    res.status(400).send(error.message);
+  
+  }
+   
+};
+
 
 const signOut = (req, res) => {
   req.logout(() => {
