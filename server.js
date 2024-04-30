@@ -5,10 +5,8 @@ const db = require("./models/db");
 const eventsRoutes = require("./routes/eventsRoutes");
 const authRoutes = require("./routes/authRoutes");
 const session = require("express-session");
-const passport = require("passport");
-const LocalStrategy = require('./passport/localStrategy');
-const flash = require('express-flash');
-
+const passport = require("./passport/passportConfig");
+const flash = require("connect-flash");
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -20,24 +18,18 @@ app.use(session({
   saveUninitialized: false
 }));
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
-//app.use(flash());
+app.use(cors({
+  origin: 'http://localhost:3001', // Adjust according to your frontend host
+  credentials: true
+}));
+app.use(flash());
 
 // Initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use('local',LocalStrategy);
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser(async (id, done) => {
-  const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [id]);
-  const user = rows[0];
-  done(null, user);
-});
 
 // Test route
 app.get("/", (req, res) => {

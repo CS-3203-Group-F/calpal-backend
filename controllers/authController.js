@@ -1,4 +1,4 @@
-const passport = require('passport');
+const passport = require("../passport/passportConfig");
 const authService = require('../services/authService');
 const { emit } = require('nodemon');
 
@@ -14,7 +14,8 @@ const signUp = async (req, res) => {
 
 const signIn = passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/login'
+  failureRedirect: '/login',
+  failureFlash: true
 });
 
 

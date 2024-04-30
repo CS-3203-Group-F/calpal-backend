@@ -4,7 +4,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const { verifyUser } = require('../services/authService'); // Import your verifyUser function
 
 const localStrategy = new LocalStrategy(async (username, password, done) => {
-    
+    console.log('Local strategy called');
   try {
     const user = await verifyUser(username, password);
     console.log(user);
