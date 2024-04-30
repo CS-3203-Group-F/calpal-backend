@@ -6,4 +6,9 @@ router.post('/signup', authController.signUp);
 router.post('/login', authController.signIn);
 router.get('/logout', authController.signOut);
 
+router.get('/login', (req, res) => {
+    console.log('login page');
+    res.send('hello world');
+});
+
 module.exports = router;
