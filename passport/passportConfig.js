@@ -8,7 +8,7 @@ passport.use(LocalStrategy);
 
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user.email);
 });
 
 passport.deserializeUser(async (id, done) => {
