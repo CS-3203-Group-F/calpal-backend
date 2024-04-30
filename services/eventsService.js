@@ -1,16 +1,31 @@
-const Event = require("../models/events"); // adjust the path as necessary
-const UsersEvent = require("../models/usersEvents"); // ensure you have such a model defined
+const db = require("../models/db");
 
 const getEventIdsByUserId = async (userId) => {
-  // Assuming you have a model or way to access the users_events join table
-  // For demonstration, I'll assume there's a UsersEvent model you can use similarly
   try {
-    const userEvents = await UsersEvent.findAll({
-      where: { user_id: userId },
-      attributes: ["event_id"],
+    // Fetch the user with associated events
+    const userWithEvents = await db.User.findByPk(userId, {
+      include: [
+        {
+          model: db.Event,
+          attributes: [], // No need to fetch actual event data here
+          through: {
+            attributes: ["event_id"], // Fetch only the EventId from the join table
+          },
+        },
+      ],
     });
-    return userEvents.map((ue) => ue.event_id); // return only the event IDs
+
+    if (!userWithEvents) {
+      throw new Error("User not found");
+    }
+
+    // Map through the events to extract only the event IDs
+    const eventIds = userWithEvents.Events.map(
+      (event) => event.UsersEvents.event_id
+    );
+    return eventIds;
   } catch (err) {
+    console.log(err);
     throw new Error(
       `Unable to retrieve event IDs for user ${userId}: ${err.message}`
     );
@@ -19,7 +34,7 @@ const getEventIdsByUserId = async (userId) => {
 
 const getEventDetailsById = async (eventId) => {
   try {
-    const event = await Event.findOne({
+    const event = await db.Event.findOne({
       where: { event_id: eventId }, // ensure the primary key on your Event model is 'id' or adjust accordingly
     });
     return event ? event.toJSON() : null; // Convert Sequelize instance to plain object

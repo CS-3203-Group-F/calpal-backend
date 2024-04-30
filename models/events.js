@@ -1,10 +1,9 @@
-const { Model, DataTypes } = require("sequelize");
-const db = require("./db.js"); // assuming db.js is in the same directory
+const { DataTypes } = require("sequelize");
 
-class Event extends Model {}
+module.exports = eventModel;
 
-Event.init(
-  {
+function eventModel(sequelize) {
+  const attributes = {
     event_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -30,12 +29,11 @@ Event.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
-  },
-  {
-    sequelize: db.sequelize,
-    modelName: "Event",
-    timestamps: false, // assuming you don't want Sequelize to automatically add timestamp fields for createdAt and updatedAt
-  }
-);
+  };
 
-module.exports = Event;
+  const options = {
+    timestamps: false,
+  };
+
+  return sequelize.define("Event", attributes, options);
+}

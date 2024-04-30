@@ -1,4 +1,6 @@
 const { Sequelize } = require("sequelize");
+const eventModel = require("./events");
+const userModel = require("./users");
 
 // Load environment variables
 require("dotenv").config();
@@ -22,10 +24,22 @@ const sequelize = new Sequelize(
   }
 );
 
+const db = {};
+db.Event = eventModel(sequelize);
+db.User = userModel(sequelize);
 
-const db = {
-  sequelize,
-};
+//Define associations
+db.User.belongsToMany(db.Event, {
+  through: "UsersEvents",
+  foreignKey: "user_id",
+  otherKey: "event_id",
+});
+db.Event.belongsToMany(db.User, {
+  through: "UsersEvents",
+  foreignKey: "event_id",
+  otherKey: "user_id",
+});
 
+sequelize.sync({ force: true });
 // Export the Sequelize instance for use in other modules
 module.exports = db;

@@ -1,10 +1,9 @@
-const { Model, DataTypes } = require("sequelize");
-const {sequelize} = require("./db.js"); // assuming db.js is in the same directory
+const { DataTypes } = require("sequelize");
 
-class User extends Model {}
+module.exports = userModel;
 
-User.init(
-  {
+function userModel(sequelize) {
+  const attributes = {
     user_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -27,12 +26,11 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-  },
-  {
-    sequelize,
-    modelName: "User",
-    timestamps: false, // assuming you don't want Sequelize to automatically add timestamp fields for createdAt and updatedAt
-  }
-);
+  };
 
-module.exports = User;
+  const options = {
+    timestamps: false,
+  };
+
+  return sequelize.define("User", attributes, options);
+}

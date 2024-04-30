@@ -11,24 +11,27 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 // configure session middleware
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false
-}));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors({
-  origin: 'http://localhost:3001', // Adjust according to your frontend host
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: "http://localhost:3001", // Adjust according to your frontend host
+    credentials: true,
+  })
+);
 app.use(flash());
 
 // Initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 // Test route
 app.get("/", (req, res) => {
@@ -38,7 +41,7 @@ app.get("/", (req, res) => {
 // Define an async function
 const startDB = async () => {
   try {
-    await db.sequelize.authenticate();
+    await db.sequalize.authenticate();
     console.log("Database connection successful");
   } catch (err) {
     console.error("Unable to connect to the database:", err);
@@ -48,10 +51,10 @@ const startDB = async () => {
   await db.sequelize.sync({ force: false });
 };
 
-startDB();
-setTimeout(() => {
-  console.log("10 seconds have passed.");
-}, 10000); // 10000 milliseconds = 10 seconds
+// startDB();
+// setTimeout(() => {
+//   console.log("10 seconds have passed.");
+// }, 10000); // 10000 milliseconds = 10 seconds
 
 // Set up routes
 app.use("/", eventsRoutes);
