@@ -18,5 +18,28 @@ function groupModel(sequelize) {
             type: DataTypes.TEXT,
             allowNull: true,
         },
+        group_owner: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        group_color: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        image: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        isPrivate: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+        },
     };
+
+    const options = {
+        timestamps: false,
+    };
+
+    return sequelize.define("Group", attributes, options);
 }
