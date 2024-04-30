@@ -1,33 +1,31 @@
-// config/database.js
+const { Sequelize } = require("sequelize");
 
-const { Sequelize } = require('sequelize');
-require('dotenv').config();
-const userModel = require('./users');
+// Load environment variables
+require("dotenv").config();
 
-// Create a Sequelize instance
+// Create a new Sequelize instance
 const sequelize = new Sequelize(
-  process.env.DB_DATABASE, // database
-  process.env.DB_USER, // username
-  process.env.DB_PASSWORD, // password
+  process.env.DB_DATABASE,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
   {
     host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    dialect: 'postgres', // Assuming you're using PostgreSQL
+    dialect: "postgres", // specifying the dialect
     dialectOptions: {
       ssl: {
         require: true,
-        rejectUnauthorized: false // You may need to set this to true in production depending on your database configuration
-      }
-    }
+        rejectUnauthorized: false,
+      },
+    },
+    port: process.env.DB_PORT,
+    logging: true, // you can turn on logging by setting it to true
   }
 );
 
-// Define the models
+
 const db = {
   sequelize,
-  users: userModel(sequelize)
 };
 
-sequelize.sync(); // Sync all models with the database
-
+// Export the Sequelize instance for use in other modules
 module.exports = db;

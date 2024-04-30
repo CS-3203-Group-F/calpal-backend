@@ -1,14 +1,15 @@
-const db = require("../models/db");
+const Event = require("../models/events"); // adjust the path as necessary
+const UsersEvent = require("../models/usersEvents"); // ensure you have such a model defined
 
 const getEventIdsByUserId = async (userId) => {
-  const query = `
-    SELECT ue.event_id FROM users_events ue
-    WHERE ue.user_id = $1;
-  `;
-
+  // Assuming you have a model or way to access the users_events join table
+  // For demonstration, I'll assume there's a UsersEvent model you can use similarly
   try {
-    const result = await db.query(query, [userId]);
-    return result.rows; // This will be an array of objects with event_id as a key
+    const userEvents = await UsersEvent.findAll({
+      where: { user_id: userId },
+      attributes: ["event_id"],
+    });
+    return userEvents.map((ue) => ue.event_id); // return only the event IDs
   } catch (err) {
     throw new Error(
       `Unable to retrieve event IDs for user ${userId}: ${err.message}`
@@ -17,14 +18,11 @@ const getEventIdsByUserId = async (userId) => {
 };
 
 const getEventDetailsById = async (eventId) => {
-  const query = `
-    SELECT * FROM events
-    WHERE event_id = $1;
-  `;
-
   try {
-    const result = await db.query(query, [eventId]);
-    return result.rows[0]; // This will be an object with all the event details
+    const event = await Event.findOne({
+      where: { event_id: eventId }, // ensure the primary key on your Event model is 'id' or adjust accordingly
+    });
+    return event ? event.toJSON() : null; // Convert Sequelize instance to plain object
   } catch (err) {
     throw new Error(
       `Unable to retrieve event details for event ${eventId}: ${err.message}`

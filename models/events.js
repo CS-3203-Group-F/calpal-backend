@@ -1,30 +1,41 @@
-/**
- * Represents an event as described in the database.
- * @class
- * @param {string} title - The title of the event.
- * @param {string} description - The description of the event.
- * @param {string} start_date - The start date of the event.
- * @param {string} end_date - The end date of the event.
- * @param {string} organizer - The organizer of the event.
- */
-class Event {
-  constructor(title, description, start_date, end_date, organizer) {
-    this.title = title;
-    this.description = description;
-    this.start_date = start_date;
-    this.end_date = end_date;
-    this.organizer = organizer;
-  }
+const { Model, DataTypes } = require("sequelize");
+const db = require("./db.js"); // assuming db.js is in the same directory
 
-  static fromJSON(jsonObj) {
-    return new Event(
-      jsonObj.title,
-      jsonObj.description,
-      jsonObj.start_date,
-      jsonObj.end_date,
-      jsonObj.organizer
-    );
+class Event extends Model {}
+
+Event.init(
+  {
+    event_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true, // This ensures it behaves as a serial field
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    start_date: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+    },
+    end_date: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+    },
+    organizer: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+  },
+  {
+    sequelize: db.sequelize,
+    modelName: "Event",
+    timestamps: false, // assuming you don't want Sequelize to automatically add timestamp fields for createdAt and updatedAt
   }
-}
+);
 
 module.exports = Event;
