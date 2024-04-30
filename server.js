@@ -21,7 +21,7 @@ app.use(session({
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:3001', // Adjust according to your frontend host
+  origin: ['http://localhost:3000', 'http://72.219.206.78'], // Adjust according to your frontend hosts
   credentials: true
 }));
 app.use(flash());
