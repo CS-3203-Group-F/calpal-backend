@@ -38,7 +38,7 @@ Create a new event for a user based on given eventData.
   "organizer": "HR Department",
   "allDay": false,
   "color": "#FF5733",
-  "location": "1234 Maple Street"
+  "location": "1234 Maple Avenue, Springfield, IL, 62704"
 }
 ```
 
@@ -86,7 +86,11 @@ Retrieve all event ids associated with a user.
 
 #### Success Response
 
-
+- **Code**: `200 OK`
+- **Content Example**:
+  ```json
+  [ 0: 1, 1: 2, 2: 3 ]
+  ```
 
 ### GET /event/:eventId
 
@@ -95,3 +99,21 @@ Retrieve all details about an event.
 #### URL Parameters:
 
 - eventId (required): The unique identifier of the event.
+
+#### Success Response
+
+- **Code**: `200 OK`
+- **Content Example**:
+  ```json
+  {
+    "event_id": 1,
+    "title": "Tech Conference 2024",
+    "description": "Annual technology conference focusing on the latest trends in software development.",
+    "start": "2024-05-15T14:00:00.000Z",
+    "end": "2024-05-17T22:00:00.000Z",
+    "organizer": "Tech Innovators Inc.",
+    "allDay": false,
+    "color": "#FF5733",
+    "location": "1234 Maple Avenue, Springfield, IL, 62704"
+  }
+  ```
