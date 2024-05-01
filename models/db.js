@@ -61,7 +61,7 @@ db.Group.belongsToMany(db.User, {
   foreignKey: "group_id",
   otherKey: "user_id",
 });
-db.Group.hasMany(db.Event, {
+db.Group.belongsToMany(db.Event, {
   through: "EventsGroups",
   foreignKey: "group_id",
   otherKey: "event_id",
