@@ -11,7 +11,6 @@ const createEvent = async (eventData) => {
       allDay: eventData.allDay,
       color: eventData.color,
       location: eventData.location,
-
     });
     // Create an entry in the UsersEvents table
     await event.addUser(eventData.user_id);
@@ -43,7 +42,7 @@ const getEventIdsByUserId = async (userId) => {
       include: [
         {
           model: db.Event,
-          attributes: [], // No need to fetch actual event data here
+          attributes: ["event_id"],
           through: {
             attributes: ["event_id"], // Fetch only the EventId from the join table
           },
@@ -54,7 +53,7 @@ const getEventIdsByUserId = async (userId) => {
     if (!userWithEvents) {
       throw new Error("User not found");
     }
-
+    console.log(userWithEvents);
     // Map through the events to extract only the event IDs
     const eventIds = userWithEvents.Events.map(
       (event) => event.UsersEvents.event_id
@@ -81,4 +80,9 @@ const getEventDetailsById = async (eventId) => {
   }
 };
 
-module.exports = { createEvent, editEventById, getEventIdsByUserId, getEventDetailsById };
+module.exports = {
+  createEvent,
+  editEventById,
+  getEventIdsByUserId,
+  getEventDetailsById,
+};
