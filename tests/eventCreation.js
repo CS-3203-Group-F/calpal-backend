@@ -1,8 +1,20 @@
 const eventsService = require("../services/eventsService");
+const groupsService = require("../services/groupsService");
+4;
+
+const groupData = {
+  group_name: "Astronomy Club",
+  group_description:
+    "A group for astronomy enthusiasts to share knowledge and stargazing experiences.",
+  group_owner: "Owner",
+  group_color: "#FF5733",
+  image: "",
+  isPrivate: false,
+};
 
 // Define the event data
 const eventData = {
-  user_id: 1,
+  user_id: 3,
   title: "Tech Conference 2024",
   description:
     "Annual technology conference focusing on the latest trends in software development.",
@@ -11,6 +23,7 @@ const eventData = {
   organizer: "Tech Innovators Inc.",
   allDay: false,
   color: "#FF5733",
+  location: "Convention Center, 123 Main Street, City, State",
 };
 
 const eventData1 = {
@@ -35,10 +48,11 @@ const eventData2 = {
   organizer: "Crafty Hands Studio",
   allDay: false,
   color: "#FF6347",
+  location: "Crafty Hands Studio, 123 Main Street, City, State",
 };
 
 const eventData3 = {
-  user_id: 1,
+  user_id: 3,
   group_id: 1,
   title: "Amateur Astronomy Night",
   description:
@@ -48,7 +62,13 @@ const eventData3 = {
   organizer: "Stargazers Society",
   allDay: false,
   color: "#483D8B",
+  location: "City Observatory, 456 Observatory Road, City, State",
 };
+
+groupsService.createGroup(groupData).then((createdGroup) => {
+  console.log("Group created:", createdGroup);
+  setTimeout(() => {}, 1000); // Wait for the group to be created before creating the event
+});
 
 // Call the createEvent function
 eventsService
@@ -70,11 +90,11 @@ const updatedEventData = {
 };
 
 // Call the editEventById function
-// eventsService
-//   .editEventById(eventId, updatedEventData)
-//   .then((updatedEvent) => {
-//     console.log("Event updated:", updatedEvent);
-//   })
-//   .catch((error) => {
-//     console.error("Error updating event:", error);
-//   });
+eventsService
+  .editEventById(eventId, updatedEventData)
+  .then((updatedEvent) => {
+    console.log("Event updated:", updatedEvent);
+  })
+  .catch((error) => {
+    console.error("Error updating event:", error);
+  });

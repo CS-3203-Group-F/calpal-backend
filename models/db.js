@@ -31,36 +31,36 @@ db.Group = groupsModel(sequelize);
 
 //Define associations
 
-//Users to ...
 db.User.belongsToMany(db.Event, {
   through: "UsersEvents",
   foreignKey: "user_id",
   otherKey: "event_id",
 });
+
+db.Event.belongsToMany(db.User, {
+  through: "UsersEvents",
+  foreignKey: "event_id",
+  otherKey: "user_id",
+});
+
 db.User.belongsToMany(db.Group, {
   through: "UsersGroups",
   foreignKey: "user_id",
   otherKey: "group_id",
 });
 
-// Events to ...
-db.Event.belongsToMany(db.User, {
-  through: "UsersEvents",
-  foreignKey: "event_id",
-  otherKey: "user_id",
-});
-db.Event.belongsTo(db.Group, {
-  through: "EventsGroups",
-  foreignKey: "event_id",
-  otherKey: "group_id",
-});
-
-// Groups to ...
 db.Group.belongsToMany(db.User, {
   through: "UsersGroups",
   foreignKey: "group_id",
   otherKey: "user_id",
 });
+
+db.Event.belongsToMany(db.Group, {
+  through: "EventsGroups",
+  foreignKey: "event_id",
+  otherKey: "group_id",
+});
+
 db.Group.belongsToMany(db.Event, {
   through: "EventsGroups",
   foreignKey: "group_id",
