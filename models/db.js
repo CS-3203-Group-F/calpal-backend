@@ -27,7 +27,7 @@ const sequelize = new Sequelize(
 const db = {};
 db.Event = eventModel(sequelize);
 db.User = userModel(sequelize);
-db.Groups =groupsModel(sequelize);
+db.Group =groupsModel(sequelize);
 
 //Define associations
 
@@ -37,7 +37,7 @@ db.User.belongsToMany(db.Event, {
   foreignKey: "user_id",
   otherKey: "event_id",
 });
-db.User.belongsToMany(db.Groups, {
+db.User.belongsToMany(db.Group, {
   through: "UsersGroups",
   foreignKey: "user_id",
   otherKey: "group_id",
@@ -49,19 +49,19 @@ db.Event.belongsToMany(db.User, {
   foreignKey: "event_id",
   otherKey: "user_id",
 });
-db.Event.belongsTo(db.Groups, {
+db.Event.belongsTo(db.Group, {
   through: "EventsGroups",
   foreignKey: "event_id",
   otherKey: "group_id",
 });
 
 // Groups to ...
-db.Groups.belongsToMany(db.User, {
+db.Group.belongsToMany(db.User, {
   through: "UsersGroups",
   foreignKey: "group_id",
   otherKey: "user_id",
 });
-db.Groups.hasMany(db.Event, {
+db.Group.hasMany(db.Event, {
   through: "EventsGroups",
   foreignKey: "group_id",
   otherKey: "event_id",
