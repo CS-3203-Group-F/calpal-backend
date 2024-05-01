@@ -6,7 +6,7 @@ const getGroupIdsByUserId = async (userId) => {
             include: [
                 {
                     model: db.Group,
-                    attributes: [],
+                    attributes: ["group_id"],
                     through: {
                         attributes: ["group_id"],
                     },
@@ -47,7 +47,7 @@ const getGroupMembers = async (groupId) => {
             include: [
                 {
                     model: db.User,
-                    attributes: [],
+                    attributes: ["user_id"],
                     through: {
                         attributes: ["user_id"],
                     },
