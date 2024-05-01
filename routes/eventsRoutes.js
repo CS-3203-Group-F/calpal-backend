@@ -3,7 +3,10 @@ const eventsController = require("../controllers/eventsController");
 const router = express.Router();
 
 // Route to create a new event
-router.post("/event", eventsController.CreateEvent);
+router.post("/createEvent", eventsController.CreateEvent);
+
+// Route to edit an event
+router.post("/editEvent/:eventId", eventsController.EditEvent);
 
 // Route to get event IDs by user ID
 router.get("/events/:userId", eventsController.EventIdsByUserId);
