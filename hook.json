@@ -1,0 +1,14 @@
+[
+    {
+      "id": "deploy-webhook",
+      "execute-command": "./deploy.sh",
+      "command-working-directory": "~/calpal-backend",
+      "pass-arguments-to-command": [
+        {
+          "source": "payload",
+          "name": "ref"
+        }
+      ]
+    }
+  ]
+  
