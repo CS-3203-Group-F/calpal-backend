@@ -18,11 +18,11 @@ function eventModel(sequelize) {
       allowNull: true,
     },
     start: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: false,
     },
     end: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: false,
     },
     organizer: {
@@ -32,6 +32,10 @@ function eventModel(sequelize) {
     allDay: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
+    },
+    color: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   };
 
