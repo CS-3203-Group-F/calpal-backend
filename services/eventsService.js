@@ -5,9 +5,12 @@ const createEvent = async (eventData) => {
     const event = await db.Event.create({
       title: eventData.title,
       description: eventData.description,
-      start_date: eventData.start_date,
-      end_date: eventData.end_date,
+      start: eventData.start,
+      end: eventData.end,
       organizer: eventData.organizer,
+      allDay: eventData.allDay,
+      color: eventData.color,
+
     });
     // Create an entry in the UsersEvents table
     await event.addUser(eventData.user_id);

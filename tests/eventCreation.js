@@ -2,12 +2,14 @@ const eventsService = require("../services/eventsService");
 
 // Define the event data
 const eventData = {
-  user_id: 1,
-  title: "Conference",
-  description: "This is a test event",
-  start_date: "2022-01-01",
-  end_date: "2022-01-01",
-  organizer: "Some Organizer",
+  user_id: 4,
+  title: 'Tech Conference 2024',
+  description: 'Annual technology conference focusing on the latest trends in software development.',
+  start: new Date('2024-05-15T09:00:00'),
+  end: new Date('2024-05-17T17:00:00'),
+  organizer: 'Tech Innovators Inc.',
+  allDay: false,
+  color: '#FF5733'
 };
 
 // Call the createEvent function
@@ -30,11 +32,11 @@ const updatedEventData = {
 };
 
 // Call the editEventById function
-eventsService
-  .editEventById(eventId, updatedEventData)
-  .then((updatedEvent) => {
-    console.log("Event updated:", updatedEvent);
-  })
-  .catch((error) => {
-    console.error("Error updating event:", error);
-  });
+// eventsService
+//   .editEventById(eventId, updatedEventData)
+//   .then((updatedEvent) => {
+//     console.log("Event updated:", updatedEvent);
+//   })
+//   .catch((error) => {
+//     console.error("Error updating event:", error);
+//   });
