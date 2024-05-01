@@ -29,26 +29,6 @@ const editEventById = async (eventId, eventData) => {
 
     const updatedEvent = await event.update(eventData);
 
-    // Update the event properties if the corresponding fields are not empty
-    // if (eventData.title) {
-    //   event.title = eventData.title;
-    // }
-    // if (eventData.description) {
-    //   event.description = eventData.description;
-    // }
-    // if (eventData.start_date) {
-    //   event.start_date = eventData.start_date;
-    // }
-    // if (eventData.end_date) {
-    //   event.end_date = eventData.end_date;
-    // }
-    // if (eventData.organizer) {
-    //   event.organizer = eventData.organizer;
-    // }
-
-    // Save the updated event
-    // await event.save();
-
     return event.toJSON();
   } catch (err) {
     throw new Error(`Unable to edit event with ID ${eventId}: ${err.message}`);
