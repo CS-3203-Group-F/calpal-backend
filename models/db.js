@@ -55,6 +55,17 @@ db.Event.belongsTo(db.Groups, {
   otherKey: "group_id",
 });
 
+// Groups to ...
+db.Groups.belongsToMany(db.User, {
+  through: "UsersGroups",
+  foreignKey: "group_id",
+  otherKey: "user_id",
+});
+db.Groups.hasMany(db.Event, {
+  through: "EventsGroups",
+  foreignKey: "group_id",
+  otherKey: "event_id",
+});
 
 sequelize.sync({ force: true });
 // Export the Sequelize instance for use in other modules
