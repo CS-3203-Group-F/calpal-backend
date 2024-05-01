@@ -10,4 +10,8 @@ router.get("/arch", (req, res) => {
   res.sendFile(path.join(__dirname, "../public", "arch.html"));
 });
 
+router.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public", "home.html"));
+});
+
 module.exports = router;

@@ -37,11 +37,6 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Test route
-app.get("/", (req, res) => {
-  res.send("<h1>Hello World</h1>");
-});
-
 // Set up routes
 app.use("/", eventsRoutes);
 app.use("/", authRoutes);
