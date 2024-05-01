@@ -6,7 +6,7 @@ const router = express.Router();
 router.post("/createEvent", eventsController.CreateEvent);
 
 // Route to edit an event
-router.post("/editEvent/:eventId", eventsController.EditEvent);
+router.post("/editEvent/:eventId", eventsController.EditEventById);
 
 // Route to get event IDs by user ID
 router.get("/events/:userId", eventsController.EventIdsByUserId);
