@@ -14,6 +14,7 @@ const createEvent = async (eventData) => {
     });
     // Create an entry in the UsersEvents table
     await event.addUser(eventData.user_id);
+    await event.addGroup(eventData.group_id);
     return event.toJSON();
   } catch (err) {
     throw new Error(`Unable to create event: ${err.message}`);

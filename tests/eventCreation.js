@@ -38,7 +38,8 @@ const eventData2 = {
 };
 
 const eventData3 = {
-  user_id: 3,
+  user_id: 1,
+  group_id: 1,
   title: "Amateur Astronomy Night",
   description:
     "An evening under the stars, guided by astronomers, where enthusiasts can observe celestial phenomena and learn about the universe.",
