@@ -37,6 +37,10 @@ function eventModel(sequelize) {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    location: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   };
 
   const options = {

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+</head>
+<body>
+    <h1>API Documentation</h1>
+    <h2>Overview</h2>
+    <p>This section provides an overview of all API endpoints, including their purpose and functionality.</p>
+
+    <h2>Endpoints</h2>
+    <h3>POST /createEvent</h3>
+    <p>Create a new event for a user based on given eventData.</p>
+    <h4>Headers:</h4>
+    <ul>
+        <li><b>Content-Type</b>: <code>application/json</code></li>
+    </ul>
+    <h4>Body Parameters</h4>
+    <ul>
+        <li><b>title</b> (string, required) - The title of the event.</li>
+        <li><b>description</b> (string, optional) - A brief description of the event.</li>
+        <li><b>start</b> (string, required) - The start time and date for the event in ISO 8601 format.</li>
+        <li><b>end</b> (string, required) - The end time and date for the event in ISO 8601 format.</li>
+        <li><b>organizer</b> (string, required) - The name or identifier of the organizer of the event.</li>
+        <li><b>allDay</b> (boolean, optional) - A boolean indicating whether the event lasts all day. Defaults to <code>false</code>.</li>
+        <li><b>color</b> (string, optional) - A string representing the color associated with the event, typically used for display purposes.</li>
+    </ul>
+    <h4>Example Request Body</h4>
+    <pre><code>{
+  "user_id": 1,
+  "title": "Board Meeting",
+  "description": "Monthly executive board meeting.",
+  "start": "2023-10-01T09:00:00Z",
+  "end": "2023-10-01T11:00:00Z",
+  "organizer": "HR Department",
+  "allDay": false,
+  "color": "#FF5733"
+}</code></pre>
+
+    <h3>PUT /editEvent/:eventId</h3>
+    <p>Edit an already existing event.</p>
+    <h4>URL Parameters:</h4>
+    <ul>
+        <li>eventId (required): The unique identifier of the event.</li>
+    </ul>
+    <h4>Headers:</h4>
+    <ul>
+        <li><b>Content-Type</b>: <code>application/json</code></li>
+    </ul>
+
+    <h3>GET /events/:userId</h3>
+    <p>Retrieve all event ids associated with a user.</p>
+    <h4>URL Parameters:</h4>
+    <ul>
+        <li>userId (required): The unique identifier of the user.</li>
+    </ul>
+
+    <h3>GET /event/:eventId</h3>
+    <p>Retrieve all details about an event.</p>
+    <h4>URL Parameters:</h4>
+    <ul>
+        <li>eventId (required): The unique identifier of the event.</li>
+    </ul>
+
+</body>
+</html>

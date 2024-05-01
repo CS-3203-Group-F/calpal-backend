@@ -3,6 +3,7 @@ const cors = require("cors");
 const db = require("./models/db");
 const eventsRoutes = require("./routes/eventsRoutes");
 const authRoutes = require("./routes/authRoutes");
+const docRoutes = require("./routes/docRoutes");
 const session = require("express-session");
 const passport = require("./passport/passportConfig");
 const flash = require("connect-flash");
@@ -21,11 +22,14 @@ app.use(
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static("public"));
 
-app.use(cors({
-  origin: ['http://localhost:3000', 'http://72.219.206.78'], // Adjust according to your frontend hosts
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "http://72.219.206.78"], // Adjust according to your frontend hosts
+    credentials: true,
+  })
+);
 
 app.use(flash());
 
@@ -41,6 +45,7 @@ app.get("/", (req, res) => {
 // Set up routes
 app.use("/", eventsRoutes);
 app.use("/", authRoutes);
+app.use("/", docRoutes);
 
 // Check if the server is running
 app.listen(port, () => {

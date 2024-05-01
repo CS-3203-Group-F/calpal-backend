@@ -10,6 +10,7 @@ const createEvent = async (eventData) => {
       organizer: eventData.organizer,
       allDay: eventData.allDay,
       color: eventData.color,
+      location: eventData.location,
 
     });
     // Create an entry in the UsersEvents table
