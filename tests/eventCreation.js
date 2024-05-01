@@ -2,7 +2,7 @@ const eventsService = require("../services/eventsService");
 
 // Define the event data
 const eventData = {
-  user_id: 3,
+  user_id: 1,
   title: "Tech Conference 2024",
   description:
     "Annual technology conference focusing on the latest trends in software development.",
@@ -51,7 +51,7 @@ const eventData3 = {
 
 // Call the createEvent function
 eventsService
-  .createEvent(eventData3)
+  .createEvent(eventData)
   .then((createdEvent) => {
     console.log("Event created:", createdEvent);
     setTimeout(() => {}, 1000); // Wait for the event to be created before updating it

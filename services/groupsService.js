@@ -68,4 +68,21 @@ const getGroupMembers = async (groupId) => {
     }
 };
 
+const createGroup = async (groupData) => {
+    try {
+        const newGroup = await db.Group.create({
+            group_name: groupData.group_name,
+            group_description: groupData.group_description,
+            group_owner: groupData.group_owner,
+            group_color: groupData.group_color,
+            image: groupData.image,
+            isPrivate: groupData.isPrivate,
+        });
+        return newGroup.toJSON();
+        }catch (err) {
+            throw new Error(`Unable to create group: ${err.message}`);
+        }
+        
+};
+
 module.exports = { getGroupIdsByUserId, getGroupDetailsById, getGroupMembers };

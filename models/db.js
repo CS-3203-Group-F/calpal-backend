@@ -27,7 +27,7 @@ const sequelize = new Sequelize(
 const db = {};
 db.Event = eventModel(sequelize);
 db.User = userModel(sequelize);
-db.Group =groupsModel(sequelize);
+db.Group = groupsModel(sequelize);
 
 //Define associations
 
