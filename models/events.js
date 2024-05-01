@@ -17,15 +17,27 @@ function eventModel(sequelize) {
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    start_date: {
-      type: DataTypes.DATEONLY,
+    start: {
+      type: DataTypes.DATE,
       allowNull: false,
     },
-    end_date: {
-      type: DataTypes.DATEONLY,
+    end: {
+      type: DataTypes.DATE,
       allowNull: false,
     },
     organizer: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    allDay: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
+    color: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    location: {
       type: DataTypes.STRING,
       allowNull: true,
     },

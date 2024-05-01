@@ -3,6 +3,7 @@ const cors = require("cors");
 const db = require("./models/db");
 const eventsRoutes = require("./routes/eventsRoutes");
 const authRoutes = require("./routes/authRoutes");
+const docRoutes = require("./routes/docRoutes");
 const session = require("express-session");
 const passport = require("./passport/passportConfig");
 const flash = require("connect-flash");
@@ -21,44 +22,25 @@ app.use(
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static("public"));
+
 app.use(
   cors({
-    origin: "http://localhost:3001", // Adjust according to your frontend host
+    origin: ["http://localhost:3000", "http://72.219.206.78"], // Adjust according to your frontend hosts
     credentials: true,
   })
 );
+
 app.use(flash());
 
 // Initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Test route
-app.get("/", (req, res) => {
-  res.send("<h1>Hello World</h1>");
-});
-
-// Define an async function
-const startDB = async () => {
-  try {
-    await db.sequalize.authenticate();
-    console.log("Database connection successful");
-  } catch (err) {
-    console.error("Unable to connect to the database:", err);
-    process.exit(1);
-  }
-
-  await db.sequelize.sync({ force: false });
-};
-
-// startDB();
-// setTimeout(() => {
-//   console.log("10 seconds have passed.");
-// }, 10000); // 10000 milliseconds = 10 seconds
-
 // Set up routes
 app.use("/", eventsRoutes);
 app.use("/", authRoutes);
+app.use("/", docRoutes);
 
 // Check if the server is running
 app.listen(port, () => {

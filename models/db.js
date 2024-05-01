@@ -67,6 +67,6 @@ db.Group.hasMany(db.Event, {
   otherKey: "event_id",
 });
 
-sequelize.sync({ force: true });
+sequelize.sync({ force: false });
 // Export the Sequelize instance for use in other modules
 module.exports = db;
