@@ -1,17 +1,14 @@
+// Imports
 const express = require("express");
 const eventsController = require("../controllers/eventsController");
-const router = express.Router();
+const router = express.Router(); // Create a new router object
 
-// Route to create a new event
-router.post("/createEvent", eventsController.CreateEvent);
+router.post("/createEvent", eventsController.CreateEvent); // Define the route for the CreateEvent controller
 
-// Route to edit an event
-router.post("/editEvent/:eventId", eventsController.EditEventById);
+router.post("/editEvent/:eventId", eventsController.EditEventById); // Define the route for the EditEventById controller
 
-// Route to get event IDs by user ID
-router.get("/events/:userId", eventsController.EventIdsByUserId);
+router.get("/events/:userId", eventsController.EventIdsByUserId); // Define the route for the EventIdsByUserId controller
 
-// Route to get event details by event ID
-router.get("/event/:eventId", eventsController.EventDetailsById);
+router.get("/event/:eventId", eventsController.EventDetailsById); // Define the route for the EventDetailsById controller
 
-module.exports = router;
+module.exports = router; // Export the router object

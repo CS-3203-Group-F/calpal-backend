@@ -1,7 +1,7 @@
 const eventsService = require("../services/eventsService");
 const groupsService = require("../services/groupsService");
-4;
 
+// Define the test group data
 const groupData = {
   group_name: "Astronomy Club",
   group_description:
@@ -12,7 +12,7 @@ const groupData = {
   isPrivate: false,
 };
 
-// Define the event data
+// Define the test event data
 const eventData = {
   user_id: 3,
   title: "Tech Conference 2024",
@@ -65,6 +65,7 @@ const eventData3 = {
   location: "City Observatory, 456 Observatory Road, City, State",
 };
 
+// Call the createGroup function with the test groupData
 groupsService.createGroup(groupData).then((createdGroup) => {
   console.log("Group created:", createdGroup);
   setTimeout(() => {}, 1000); // Wait for the group to be created before creating the event
@@ -74,7 +75,7 @@ groupsService.createGroup(groupData).then((createdGroup) => {
 eventsService
   .createEvent(eventData)
   .then((createdEvent) => {
-    console.log("Event created:", createdEvent);
+    console.log("Event created:", createdEvent); // Log the created event
     setTimeout(() => {}, 1000); // Wait for the event to be created before updating it
   })
   .catch((error) => {
@@ -89,11 +90,11 @@ const updatedEventData = {
   title: "New Event",
 };
 
-// Call the editEventById function
+// Call the editEventById function with the eventId and updated eventData
 eventsService
   .editEventById(eventId, updatedEventData)
   .then((updatedEvent) => {
-    console.log("Event updated:", updatedEvent);
+    console.log("Event updated:", updatedEvent); // Log the updated event
   })
   .catch((error) => {
     console.error("Error updating event:", error);
