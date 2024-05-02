@@ -12,7 +12,7 @@
             color: #333;
             background-color: #f4f4f4;
         }
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             color: #333;
         }
         h1 {
@@ -58,13 +58,14 @@
     <p>This section provides an overview of all API endpoints, including their purpose and functionality.</p>
 
     <h2>Endpoints</h2>
-    <h3>POST /createEvent</h3>
+    <h3>Events Endpoints</h3>
+    <h4>POST /createEvent</h4>
     <p>Create a new event for a user based on given eventData.</p>
-    <h4>Headers:</h4>
+    <h5>Headers:</h5>
     <ul>
         <li><b>Content-Type</b>: <code>application/json</code></li>
     </ul>
-    <h4>Body Parameters</h4>
+    <h5>Body Parameters</h5>
     <ul>
         <li><b>user_id</b> (integer, required) - The id of the user with which the event is associated.</li>
         <li><b>title</b> (string, required) - The title of the event.</li>
@@ -76,7 +77,7 @@
         <li><b>color</b> (string, optional) - A string representing the color associated with the event, typically used for display purposes.</li>
         <li><b>location</b> (string, optional) - The location of the event.</li>
     </ul>
-    <h4>Example Request Body</h4>
+    <h5>Example Request Body</h5>
     <pre><code class="code">{
   "user_id": 1,
   "title": "Board Meeting",
@@ -89,13 +90,17 @@
   "location": "1234 Maple Avenue, Springfield, IL, 62704"
 }</code></pre>
 
-    <h3>PUT /editEvent/:eventId</h3>
+    <h4>PUT /editEvent/:eventId</h4>
     <p>Edit an already existing event.</p>
-    <h4>URL Parameters:</h4>
+    <h5>URL Parameters:</h5>
     <ul>
         <li>eventId (required): The unique identifier of the event.</li>
     </ul>
-    <h4>Body Parameters</h4>
+    <h5>Headers:</h5>
+    <ul>
+        <li><b>Content-Type</b>: <code>application/json</code></li>
+    </ul>
+    <h5>Body Parameters</h5>
     <p>All parameters are optional. Only fields with passed parameters will be changed.</p>
     <ul>
         <li><b>title</b> (string, optional) - The title of the event.</li>
@@ -107,30 +112,30 @@
         <li><b>color</b> (string, optional) - A string representing the color associated with the event, typically used for display purposes.</li>
         <li><b>location</b> (string, optional) - The location of the event.</li>
     </ul>
-    <h4>Example Request Body</h4>
+    <h5>Example Request Body</h5>
     <pre><code class="code">{
   "title": "New Board Meeting",
   "start": "2023-10-01T10:00:00Z"
 }</code></pre>
 
-    <h3>GET /events/:userId</h3>
+    <h4>GET /events/:userId</h4>
     <p>Retrieve all event ids associated with a user.</p>
-    <h4>URL Parameters:</h4>
+    <h5>URL Parameters:</h5>
     <ul>
         <li>userId (required): The unique identifier of the user.</li>
     </ul>
-    <h4>Success Response</h4>
+    <h5>Success Response</h5>
     <p><b>Code</b>: <code>200 OK</code></p>
     <p><b>Content Example</b>:</p>
     <pre><code class="code">[ 0: 1, 1: 2, 2: 3 ]</code></pre>
 
-    <h3>GET /event/:eventId</h3>
+    <h4>GET /event/:eventId</h4>
     <p>Retrieve all details about an event.</p>
-    <h4>URL Parameters:</h4>
+    <h5>URL Parameters:</h5>
     <ul>
         <li>eventId (required): The unique identifier of the event.</li>
     </ul>
-    <h4>Success Response</h4>
+    <h5>Success Response</h5>
     <p><b>Code</b>: <code>200 OK</code></p>
     <p><b>Content Example</b>:</p>
     <pre><code class="code">{
@@ -144,6 +149,77 @@
     "color": "#FF5733",
     "location": "1234 Maple Avenue, Springfield, IL, 62704"
 }</code></pre>
+
+<h3>Groups Endpoints</h3>
+<h4>GET /groups/:userId</h4>
+<p>Retrieve group IDs associated with a specific user.</p>
+<h5>URL Parameters:</h5>
+<ul>
+    <li><b>userId</b> (integer, required) - The ID of the user.</li>
+</ul>
+<h5>Success Response</h5>
+<p><b>Code</b>: <code>200 OK</code></p>
+<p><b>Content Example</b>:</p>
+<pre><code class="code">[1, 2, 3]</code></pre>
+
+<h4>GET /group/:groupId</h4>
+<p>Retrieve details of a group by its ID.</p>
+<h5>URL Parameters:</h5>
+<ul>
+    <li><b>groupId</b> (integer, required) - The ID of the group.</li>
+</ul>
+<h5>Success Response</h5>
+<p><b>Code</b>: <code>200 OK</code></p>
+<p><b>Content Example</b>:</p>
+<pre><code class="code">{
+"group_id": 1,
+"group_name": "Group 1",
+"group_description": "Description of Group 1",
+"group_owner": 123,
+"group_color": "#FFFFFF",
+"image": "image.png",
+"isPrivate": false
+}</code></pre>
+
+<h4>GET /group/members/:groupId</h4>
+<p>Retrieve user IDs of members in a group by its ID.</p>
+<h5>URL Parameters:</h5>
+<ul>
+    <li><b>groupId</b> (integer, required) - The ID of the group.</li>
+</ul>
+<h5>Success Response</h5>
+<p><b>Code</b>: <code>200 OK</code></p>
+<p><b>Content Example</b>:</p>
+<pre><code class="code">[123, 456, 789]</code></pre>
+
+<h4>POST /createGroup</h4>
+<p>Create a new group based on given group data.</p>
+<h5>Headers:</h5>
+<ul>
+    <li><b>Content-Type</b>: <code>application/json</code></li>
+</ul>
+<h5>Body Parameters</h5>
+<ul>
+    <li><b>group_name</b> (string, required) - The name of the group.</li>
+    <li><b>group_description</b> (string, required) - A brief description of the group.</li>
+    <li><b>group_owner</b> (integer, required) - The ID of the group owner.</li>
+    <li><b>group_color</b> (string, optional) - The color associated with the group.</li>
+    <li><b>image</b> (string, optional) - The image URL for the group.</li>
+    <li><b>isPrivate</b> (boolean, optional) - Indicates if the group is private.</li>
+</ul>
+<h5>Example Request Body</h5>
+<pre><code class="code">{
+"group_name": "Tech Enthusiasts",
+"group_description": "A group for discussing technology trends and innovations.",
+"group_owner": 123,
+"group_color": "#336699",
+"image": "tech.jpg",
+"isPrivate": false
+}</code></pre>
+
+</body>
+</html>
+
 
 </body>
 </html>
