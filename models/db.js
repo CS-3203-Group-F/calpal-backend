@@ -1,7 +1,7 @@
 const { Sequelize } = require("sequelize");
 const eventModel = require("./events");
 const userModel = require("./users");
-
+const groupsModel = require("./groups");
 // Load environment variables
 require("dotenv").config();
 
@@ -27,17 +27,44 @@ const sequelize = new Sequelize(
 const db = {};
 db.Event = eventModel(sequelize);
 db.User = userModel(sequelize);
+db.Group = groupsModel(sequelize);
 
 //Define associations
+
 db.User.belongsToMany(db.Event, {
   through: "UsersEvents",
   foreignKey: "user_id",
   otherKey: "event_id",
 });
+
 db.Event.belongsToMany(db.User, {
   through: "UsersEvents",
   foreignKey: "event_id",
   otherKey: "user_id",
+});
+
+db.User.belongsToMany(db.Group, {
+  through: "UsersGroups",
+  foreignKey: "user_id",
+  otherKey: "group_id",
+});
+
+db.Group.belongsToMany(db.User, {
+  through: "UsersGroups",
+  foreignKey: "group_id",
+  otherKey: "user_id",
+});
+
+db.Event.belongsToMany(db.Group, {
+  through: "EventsGroups",
+  foreignKey: "event_id",
+  otherKey: "group_id",
+});
+
+db.Group.belongsToMany(db.Event, {
+  through: "EventsGroups",
+  foreignKey: "group_id",
+  otherKey: "event_id",
 });
 
 sequelize.sync({ force: false });
