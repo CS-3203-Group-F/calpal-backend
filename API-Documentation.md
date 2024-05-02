@@ -6,15 +6,17 @@ This section provides an overview of all API endpoints, inclduing their purpose 
 
 ## Endpoints
 
-### POST /createEvent
+### Events Endpoints
+
+#### POST /createEvent
 
 Create a new event for a user based on given eventData.
 
-#### Headers:
+##### Headers:
 
 - **Content-Type**: `application/json`
 
-#### Body Parameters
+##### Body Parameters
 
 - `user_id` (integer, required) - The id of the user with which the event is associated.
 - `title` (string, required) - The title of the event.
@@ -26,7 +28,7 @@ Create a new event for a user based on given eventData.
 - `color` (string, optional) - A string representing the color associated with the event, typically used for display purposes.
 - `location` (string, optional) - A string representation of the location of the event.
 
-#### Example Request Body
+##### Example Request Body
 
 ```json
 {
@@ -42,19 +44,19 @@ Create a new event for a user based on given eventData.
 }
 ```
 
-### PUT /editEvent/:eventId
+#### PUT /editEvent/:eventId
 
 Edit an already existing event.
 
-#### URL Parameters:
+##### URL Parameters:
 
 - eventId (required): The unique identifier of the event.
 
-#### Headers:
+##### Headers:
 
 - **Content-Type**: `application/json`
 
-#### Body Parameters
+##### Body Parameters
 
 All parameters are optional. Only fields with passed parameters will be changed.
 
@@ -67,7 +69,7 @@ All parameters are optional. Only fields with passed parameters will be changed.
 - `color` (string, optional) - A string representing the color associated with the event, typically used for display purposes.
 - `location` (string, optional) - A string representation of the location of the event.
 
-#### Example Request Body
+##### Example Request Body
 
 ```json
 {
@@ -76,15 +78,15 @@ All parameters are optional. Only fields with passed parameters will be changed.
 }
 ```
 
-### GET /events/:userId
+#### GET /events/:userId
 
 Retrieve all event ids associated with a user.
 
-#### URL Parameters:
+##### URL Parameters:
 
 - userId (required): The unique identifier of the user.
 
-#### Success Response
+##### Success Response
 
 - **Code**: `200 OK`
 - **Content Example**:
@@ -92,15 +94,15 @@ Retrieve all event ids associated with a user.
   [ 0: 1, 1: 2, 2: 3 ]
   ```
 
-### GET /event/:eventId
+#### GET /event/:eventId
 
 Retrieve all details about an event.
 
-#### URL Parameters:
+##### URL Parameters:
 
 - eventId (required): The unique identifier of the event.
 
-#### Success Response
+##### Success Response
 
 - **Code**: `200 OK`
 - **Content Example**:
@@ -117,3 +119,92 @@ Retrieve all details about an event.
     "location": "1234 Maple Avenue, Springfield, IL, 62704"
   }
   ```
+
+### Groups Endpoints
+
+#### GET /groups/:userId
+
+Retrieve group IDs associated with a specific user.
+
+##### URL Parameters:
+
+- `userId` (integer, required): The ID of the user.
+
+##### Success Response
+
+- **Code**: 200 OK
+- **Content Example**:
+  ```json
+  [1, 2, 3]
+  ```
+
+#### GET /group/:groupId
+
+Retrieve details of a group by its ID.
+
+##### URL Parameters:
+
+- `groupId` (integer, required): The ID of the group.
+
+##### Success Response
+
+- **Code**: 200 OK
+- **Content Example**:
+  ```json
+  {
+    "group_id": 1,
+    "group_name": "Group 1",
+    "group_description": "Description of Group 1",
+    "group_owner": 123,
+    "group_color": "#FFFFFF",
+    "image": "image.png",
+    "isPrivate": false
+  }
+  ```
+
+#### GET /group/members/:groupId
+
+Retrieve user IDs of members in a group by its ID.
+
+##### URL Parameters:
+
+- `groupId` (integer, required): The ID of the group.
+
+##### Success Response
+
+- **Code**: 200 OK
+- **Content Example**:
+
+  ```json
+  [123, 456, 789]
+  ```
+
+#### POST /createGroup
+
+Create a new group based on given group data.
+
+##### Headers:
+
+- **Content-Type**: `application/json`
+
+##### Body Parameters
+
+- `group_name` (string, required): The name of the group.
+- `group_description` (string, required): A brief description of the group.
+- `group_owner` (integer, required): The ID of the group owner.
+- `group_color` (string, optional): The color associated with the group.
+- `image` (string, optional): The image URL for the group.
+- `isPrivate` (boolean, optional): Indicates if the group is private.
+
+##### Example Request Body
+
+```json
+{
+  "group_name": "Tech Enthusiasts",
+  "group_description": "A group for discussing technology trends and innovations.",
+  "group_owner": 123,
+  "group_color": "#336699",
+  "image": "tech.jpg",
+  "isPrivate": false
+}
+```
